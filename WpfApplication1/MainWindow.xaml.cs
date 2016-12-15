@@ -31,15 +31,15 @@ namespace WpfApplication1
             InitializeComponent();
         }
 
-            private void OnWindowLoaded(object sender, RoutedEventArgs e)
+        private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             //class to be called when the application finishes loading
-            
+
             //creating a new datatable to insert the data that will be pulled out from the database
             DataTable ds = new DataTable();
             //in the code block below I created the sql connection and wrote the command that would select the data that i
             //require to use for my application
-            
+
             using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
             {
                 SqlCommand myCommand = default(SqlCommand);
@@ -58,7 +58,7 @@ namespace WpfApplication1
         private void search_Click(object sender, RoutedEventArgs e)
         {
             //when the user clicks search this class is fired.
-            
+
             DataTable ds = new DataTable();
             using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
             {
@@ -95,7 +95,8 @@ namespace WpfApplication1
             }
         }
 
-        private void LoadStudents() {
+        private void LoadStudents()
+        {
             //sql connection to pull all students data
             DataTable ds = new DataTable();
             using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
@@ -115,25 +116,26 @@ namespace WpfApplication1
         {
             //when the user clicks the update button on the row we need to pull the matching id for that student 
             //to update the correct field in the DB 
-            
+
             //here we get the row data of the selected item
             object item = grdGrades.SelectedItem;
 
             //here we get the data we need from the row data we pulled before 
             int id = int.Parse((grdGrades.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
 
-             string grade = ((grdGrades.SelectedCells[3].Column.GetCellContent(item) as TextBlock).Text);
+            string grade = ((grdGrades.SelectedCells[3].Column.GetCellContent(item) as TextBlock).Text);
 
-            
+
             if (grade == "")
             {
                 //some basic validation if the grade is updated to empty. if the field is empty the app doesnt update the DB
                 MessageBox.Show("The grade cannot be empty");
                 LoadStudents();
             }
-            else {
+            else
+            {
                 if (grade == "100")
-                   //if the grade is exactly 100 then we just update the table
+                //if the grade is exactly 100 then we just update the table
                 {
                     using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
                     {
@@ -149,13 +151,14 @@ namespace WpfApplication1
 
                     MessageBox.Show("The grade has been updated");
                 }
-                else if (grade.Length >2 )
+                else if (grade.Length > 2)
                 //if the grade is not 100 and the legth of it is more than 2 digits then we dont update the table
                 {
                     MessageBox.Show("The grade needs to be less than 100");
                     LoadStudents();
                 }
                 else
+
                 {
                     //if the grade is not 100 and not more than 2 characters we update the table
                     //create the sql connection
@@ -176,12 +179,12 @@ namespace WpfApplication1
                     MessageBox.Show("The grade has been updated");
                 }
             }
-              
-            }
-
 
         }
-        }
+
+
+    }
+}
 
 
 
