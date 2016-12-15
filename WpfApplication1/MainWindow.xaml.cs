@@ -168,6 +168,7 @@ namespace WpfApplication1
                         cn.Open();
                         //sql update statement, updating the column grade with the text the user inputed on 
                         //the column that matches the studentCard
+                        //
                         string SQL = "Update tblSubmission SET Grade=@GR WHERE StudentCard=@SC";
                         myCommand = new SqlCommand(SQL, cn);
                         myCommand.Parameters.Add(new SqlParameter("@GR", grade));
